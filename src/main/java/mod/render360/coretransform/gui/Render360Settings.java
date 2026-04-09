@@ -12,13 +12,14 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 
-public class Render360Settings extends GuiScreen {
-
+// public class Render360Settings extends GuiScreen
+/*
+{
 	private final GuiScreen parentGuiScreen;
 	public static final String screenTitle = "Render 360 Settings";
 	
 	//Load options from file. Run only once.
-	/*static {
+	static {
 		File optionsFile = new File("optionsRender360.txt");
 		try {
 			List<String> options = Files.readAllLines(Paths.get("optionsRender360.txt"));
@@ -26,7 +27,7 @@ public class Render360Settings extends GuiScreen {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 
 	public Render360Settings(GuiScreen parentScreenIn)
 	{
@@ -84,3 +85,4 @@ public class Render360Settings extends GuiScreen {
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 }
+*/

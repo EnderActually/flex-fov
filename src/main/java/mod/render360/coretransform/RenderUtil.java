@@ -3,13 +3,7 @@ package mod.render360.coretransform;
 import java.io.IOException;
 import java.nio.FloatBuffer;
 
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import java.io.IOException;
-import java.nio.FloatBuffer;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -92,10 +86,11 @@ public class RenderUtil {
 	 */
 	public static void onWorldLoad(WorldClient worldClient) {
 		if (worldClient != null) {
+			Minecraft mc = Minecraft.getInstance();
 			if (framebuffer == null) {
 				//The actual numbers don't matter, they are reset later.
-				framebuffer = new Framebuffer((int)(Display.getHeight()*renderMethod.getQuality()),
-						(int)(Display.getHeight()*renderMethod.getQuality()), true);
+				framebuffer = new Framebuffer((int)(mc.getWindow().getHeight()*renderMethod.getQuality()),
+						(int)(mc.getWindow().getHeight()*renderMethod.getQuality()), true);
 				//create 6 new textures
 				for (int i = 0; i < framebufferTextures.length; i++) {
 					framebufferTextures[i] = TextureUtil.glGenTextures();
@@ -140,10 +135,10 @@ public class RenderUtil {
 	public static void setupRenderWorld(EntityRenderer er, Minecraft mc, float partialTicks, long finishTimeNano) {
 
 		//reload the framebuffer and shader
-		if (forceReload || width != mc.displayWidth || height != mc.displayHeight) {
+		if (forceReload || width != mc.getWindow().getWidth() || height != mc.getWindow().getHeight()) {
 			forceReload = false;
-			width = mc.displayWidth;
-			height = mc.displayHeight;
+			width = mc.getWindow().getWidth();
+			height = mc.getWindow().getHeight();
 			//delete textures
 			for (int i = 0; i < framebufferTextures.length; i++) {
 				TextureUtil.deleteTexture(framebufferTextures[i]);
@@ -207,9 +202,9 @@ public class RenderUtil {
 	 */
 	public static void renderGuiStart() {
 		if (renderMethod.getResizeGui()) {
-			Minecraft mc = Minecraft.getMinecraft();
+			Minecraft mc = Minecraft.getInstance();
 			framebuffer.bindFramebuffer(false);
-			GlStateManager.viewport(0, 0, (int) (mc.displayHeight*renderMethod.getQuality()), (int) (mc.displayHeight*renderMethod.getQuality()));
+			GlStateManager.viewport(0, 0, (int) (mc.getWindow().getHeight()*renderMethod.getQuality()), (int) (mc.getWindow().getHeight()*renderMethod.getQuality()));
 			OpenGlHelper.glFramebufferTexture2D(OpenGlHelper.GL_FRAMEBUFFER, OpenGlHelper.GL_COLOR_ATTACHMENT0, GL11.GL_TEXTURE_2D, framebufferTextures[0], 0);
 			GlStateManager.bindTexture(0);
 		}
@@ -221,11 +216,15 @@ public class RenderUtil {
 	 */
 	public static void renderGuiEnd() {
 		if (renderMethod.getResizeGui()) {
-			Minecraft mc = Minecraft.getMinecraft();
-			if (!Mouse.isGrabbed()) {
+			Minecraft mc = Minecraft.getInstance();
+			long window = mc.getWindow().getWindow();
+			if (GLFW.glfwGetInputMode(window, GLFW.GLFW_CURSOR) != GLFW.GLFW_CURSOR_DISABLED) {
 				GL20.glUseProgram(shader.getShaderProgram());
 				int angleUniform = GL20.glGetUniformLocation(shader.getShaderProgram(), "cursorPos");
-				GL20.glUniform2f(angleUniform, Mouse.getX()/(float)mc.displayWidth, Mouse.getY()/(float)mc.displayHeight);
+				double[] x = new double[1];
+				double[] y = new double[1];
+				GLFW.glfwGetCursorPos(window, x, y);
+				GL20.glUniform2f(angleUniform, (float)x[0]/(float)mc.getWindow().getWidth(), (float)y[0]/(float)mc.getWindow().getHeight());
 				int cursorUniform = GL20.glGetUniformLocation(shader.getShaderProgram(), "drawCursor");
 				GL20.glUniform1i(cursorUniform, 1);
 				GL20.glUseProgram(0);
@@ -236,7 +235,7 @@ public class RenderUtil {
 				GL20.glUseProgram(0);
 			}
 			mc.getFramebuffer().bindFramebuffer(false);
-			GlStateManager.viewport(0, 0, mc.displayWidth, mc.displayHeight);
+			GlStateManager.viewport(0, 0, mc.getWindow().getWidth(), mc.getWindow().getHeight());
 			//if not in menu or inventory
 			if (mc.currentScreen == null) {
 				renderMethod.runShader(mc, shader, framebufferTextures);
@@ -250,10 +249,10 @@ public class RenderUtil {
 	 */
 	public static void renderGuiStart2() {
 		if (renderMethod.getResizeGui()) {
-			Minecraft mc = Minecraft.getMinecraft();
-			if (mc.theWorld != null) {
+			Minecraft mc = Minecraft.getInstance();
+			if (mc.level != null) {
 				framebuffer.bindFramebuffer(false);
-				GlStateManager.viewport(0, 0, (int) (mc.displayHeight*renderMethod.getQuality()), (int) (mc.displayHeight*renderMethod.getQuality()));
+				GlStateManager.viewport(0, 0, (int) (mc.getWindow().getHeight()*renderMethod.getQuality()), (int) (mc.getWindow().getHeight()*renderMethod.getQuality()));
 			}
 		}
 	}
@@ -264,10 +263,10 @@ public class RenderUtil {
 	 */
 	public static void renderGuiEnd2() {
 		if (renderMethod.getResizeGui()) {
-			Minecraft mc = Minecraft.getMinecraft();
-			if (mc.theWorld != null) {
+			Minecraft mc = Minecraft.getInstance();
+			if (mc.level != null) {
 				mc.getFramebuffer().bindFramebuffer(false);
-				GlStateManager.viewport(0, 0, mc.displayWidth, mc.displayHeight);
+				GlStateManager.viewport(0, 0, mc.getWindow().getWidth(), mc.getWindow().getHeight());
 				renderMethod.runShader(mc, shader, framebufferTextures);
 			}
 		}

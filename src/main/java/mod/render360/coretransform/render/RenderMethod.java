@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.nio.FloatBuffer;
 
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.GL15;
@@ -20,9 +19,9 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
-import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.client.renderer.VertexBuffer;
-import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
+import com.mojang.blaze3d.vertex.BufferBuilder;
+import com.mojang.blaze3d.vertex.DefaultVertexFormats;
+import com.mojang.blaze3d.vertex.Tessellator;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.entity.Entity;
 
@@ -115,8 +114,8 @@ public abstract class RenderMethod {
 			guiScreen.width = framebufferIn.framebufferTextureWidth;
 			guiScreen.height = framebufferIn.framebufferTextureHeight;
 		}
-		Minecraft mc = Minecraft.getMinecraft();
-		Framebuffer framebuffer = new Framebuffer((int)(Display.getHeight()*getQuality()), (int)(Display.getHeight()*getQuality()), true);
+		Minecraft mc = Minecraft.getInstance();
+		Framebuffer framebuffer = new Framebuffer((int)(mc.getWindow().getHeight()*getQuality()), (int)(mc.getWindow().getHeight()*getQuality()), true);
 
 		framebuffer.bindFramebuffer(false);
 		OpenGlHelper.glFramebufferTexture2D(OpenGlHelper.GL_FRAMEBUFFER, OpenGlHelper.GL_COLOR_ATTACHMENT0, GL11.GL_TEXTURE_2D, framebuffer.framebufferTexture, 0);
@@ -126,7 +125,7 @@ public abstract class RenderMethod {
 		GlStateManager.disableLighting();
         GlStateManager.disableFog();
         Tessellator tessellator = Tessellator.getInstance();
-        VertexBuffer vertexbuffer = tessellator.getBuffer();
+        BufferBuilder vertexbuffer = tessellator.getBuffer();
         mc.getTextureManager().bindTexture(guiScreen.OPTIONS_BACKGROUND);
         vertexbuffer.begin(7, DefaultVertexFormats.POSITION_TEX_COLOR);
         vertexbuffer.pos(0.0D, (double)guiScreen.height, 0.0D).tex(0.0D, (double)((float)guiScreen.height / 32.0F)).color(64, 64, 64, 255).endVertex();
