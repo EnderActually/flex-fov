@@ -5,6 +5,11 @@ import java.nio.FloatBuffer;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
+import java.io.IOException;
+import java.nio.FloatBuffer;
+
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 
@@ -89,9 +94,8 @@ public class RenderUtil {
 		if (worldClient != null) {
 			if (framebuffer == null) {
 				//The actual numbers don't matter, they are reset later.
-				int height = Minecraft.getInstance().getWindow().getHeight();
-				framebuffer = new Framebuffer((int)(height*renderMethod.getQuality()),
-						(int)(height*renderMethod.getQuality()), true);
+				framebuffer = new Framebuffer((int)(Display.getHeight()*renderMethod.getQuality()),
+						(int)(Display.getHeight()*renderMethod.getQuality()), true);
 				//create 6 new textures
 				for (int i = 0; i < framebufferTextures.length; i++) {
 					framebufferTextures[i] = TextureUtil.glGenTextures();
@@ -217,11 +221,11 @@ public class RenderUtil {
 	 */
 	public static void renderGuiEnd() {
 		if (renderMethod.getResizeGui()) {
-			Minecraft mc = Minecraft.getInstance();
-			if (!mc.mouseHandler.isMouseGrabbed()) {
+			Minecraft mc = Minecraft.getMinecraft();
+			if (!Mouse.isGrabbed()) {
 				GL20.glUseProgram(shader.getShaderProgram());
 				int angleUniform = GL20.glGetUniformLocation(shader.getShaderProgram(), "cursorPos");
-				GL20.glUniform2f(angleUniform, (float)mc.mouseHandler.xpos / mc.getWindow().getWidth(), (float)mc.mouseHandler.ypos / mc.getWindow().getHeight());
+				GL20.glUniform2f(angleUniform, Mouse.getX()/(float)mc.displayWidth, Mouse.getY()/(float)mc.displayHeight);
 				int cursorUniform = GL20.glGetUniformLocation(shader.getShaderProgram(), "drawCursor");
 				GL20.glUniform1i(cursorUniform, 1);
 				GL20.glUseProgram(0);

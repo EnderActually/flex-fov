@@ -42,7 +42,7 @@ the mod installed.
 gradlew.bat runClient
 ```
 
-> __NOTE__: Prior to running this, I had Minecraft and Minecraft Forge installed (both 1.20.1).
+> __NOTE__: Prior to running this, I had Minecraft and Minecraft Forge installed (both 1.16.5).
 > But I am not actually sure if this is required, since I believe this gradle
 > setup is building the entire game itself from decompiled sources?
 
