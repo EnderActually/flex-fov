@@ -20,6 +20,8 @@ java {
     }
 }
 
+sourceSets.main.java.exclude 'mod/render360/coretransform/gui/**'
+
 jar {
     manifest {
         attributes 'FMLAT': 'render360_at.cfg',
@@ -65,8 +67,7 @@ repositories {
     }
 }
 
-processResources
-{
+sourceSets.main.java.exclude 'mod/render360/coretransform/gui/**'
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
 

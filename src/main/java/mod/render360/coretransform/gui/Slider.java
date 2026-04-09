@@ -1,17 +1,6 @@
 package mod.render360.coretransform.gui;
 
-import java.text.DecimalFormat;
-
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiPageButtonList;
-import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.resources.I18n;
-
-/*
-public class Slider extends GuiButton
-{
-{
+// Disabled for 1.20.1
     private float sliderPosition = 1.0F;
     private float stepSize;
     public boolean isMouseDown;
