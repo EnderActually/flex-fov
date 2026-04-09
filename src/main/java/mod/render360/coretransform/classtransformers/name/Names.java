@@ -7,9 +7,9 @@ public class Names {
     public static final MethodName EntityRenderer_hurtCameraEffect = new MethodName("hurtCameraEffect", "func_78482_e", "d", "(F)V", "(F)V");
     public static final MethodName EntityRenderer_orientCamera = new MethodName("orientCamera", "func_78467_g", "f", "(F)V", "(F)V");
     public static final MethodName EntityRenderer_setupCameraTransform = new MethodName("setupCameraTransform", "func_78479_a", "a", "(FI)V", "(FI)V");
-    public static final MethodName EntityRenderer_updateCameraAndRender = new MethodName("updateCameraAndRender", "func_181560_a", "a", "(FJ)V", "(FJ)V");
-    public static final MethodName EntityRenderer_renderWorld = new MethodName("renderWorld", "func_78471_a", "b", "(FJ)V", "(FJ)V");
-    public static final MethodName EntityRenderer_renderWorldPass = new MethodName("renderWorldPass", "func_175068_a", "a", "(IFJ)V", "(IFJ)V");
+    public static final MethodName EntityRenderer_updateCameraAndRender = new MethodName("render", "func_181560_a", "a", "(FJ)V", "(FJ)V");
+    public static final MethodName EntityRenderer_renderWorld = new MethodName("renderLevel", "func_78471_a", "b", "(FJ)V", "(FJ)V");
+    public static final MethodName EntityRenderer_renderWorldPass = new MethodName("renderLevel", "func_175068_a", "a", "(FJ)V", "(FJ)V");
     public static final MethodName EntityRenderer_updateFogColor = new MethodName("updateFogColor", "func_78466_h", "h", "(F)V", "(F)V");
     public static final MethodName EntityRenderer_drawNameplate = new MethodName("drawNameplate", "func_189692_a", "a", "(Lnet/minecraft/client/gui/FontRenderer;Ljava/lang/String;FFFIFFZZ)V", "(Lbfe;Ljava/lang/String;FFFIFFZZ)V");
     public static final FieldName EntityRenderer_mc = new FieldName("mc", "field_78531_r", "h", "Lnet/minecraft/client/Minecraft;", "Lbeq;");
@@ -44,11 +44,11 @@ public class Names {
     public static final FieldName Minecraft_currentScreen = new FieldName("currentScreen", "field_71462_r", "m", "Lnet/minecraft/client/gui/GuiScreen;", "Lbhm;");
     public static final FieldName Minecraft_gameSettings = new FieldName("gameSettings", "field_71474_y", "u", "Lnet/minecraft/client/settings/GameSettings;", "Lbes;");
 
-    public static final ClassName Barrier = new ClassName("net.minecraft.client.particle.Barrier", "bnx");
-    public static final ClassName ParticleBreaking = new ClassName("net.minecraft.client.particle.ParticleBreaking", "bny");
-    public static final ClassName ParticleDigging = new ClassName("net.minecraft.client.particle.ParticleDigging", "bph");
-    public static final ClassName ParticleExplosionLarge = new ClassName("net.minecraft.client.particle.ParticleExplosionLarge", "bol");
-    public static final ClassName ParticleSweepAttack = new ClassName("net.minecraft.client.particle.ParticleSweepAttack", "bnw");
+    public static final ClassName Barrier = new ClassName("net.minecraft.client.particle.BarrierParticle", "bnx");
+    public static final ClassName ParticleBreaking = new ClassName("net.minecraft.client.particle.BreakingItemParticle", "bny");
+    public static final ClassName ParticleDigging = new ClassName("net.minecraft.client.particle.DiggingParticle", "bph");
+    public static final ClassName ParticleExplosionLarge = new ClassName("net.minecraft.client.particle.LargeExplosionParticle", "bol");
+    public static final ClassName ParticleSweepAttack = new ClassName("net.minecraft.client.particle.SweepAttackParticle", "bnw");
     public static final ClassName Particle = new ClassName("net.minecraft.client.particle.Particle", "bos");
     public static final MethodName Particle_renderParticle = new MethodName("renderParticle", "func_180434_a", "a", "(Lnet/minecraft/client/renderer/VertexBuffer;Lnet/minecraft/entity/Entity;FFFFFF)V", "(Lbpw;Lsm;FFFFFF)V");
 
