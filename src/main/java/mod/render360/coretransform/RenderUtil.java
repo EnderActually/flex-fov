@@ -11,7 +11,7 @@ import mod.render360.coretransform.render.Standard;
 import mod.render360.coretransform.render.RenderMethod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.multiplayer.WorldClient;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.renderer.EntityRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -84,7 +84,7 @@ public class RenderUtil {
 	 * Called from asm modified code on world load and unload.
 	 * @param worldClient used to detect if the world is being loaded or unloaded.
 	 */
-	public static void onWorldLoad(WorldClient worldClient) {
+	public static void onWorldLoad(ClientLevel worldClient) {
 		if (worldClient != null) {
 			Minecraft mc = Minecraft.getInstance();
 			if (framebuffer == null) {
