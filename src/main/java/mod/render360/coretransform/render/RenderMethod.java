@@ -384,7 +384,8 @@ public abstract class RenderMethod {
 		return null;
 	}
 
-	public class Responder implements GuiResponder {
+	// public class Responder implements GuiResponder {
+	/*
 		@Override
 		public void setEntryValue(int id, boolean value) {
 
@@ -406,4 +407,5 @@ public abstract class RenderMethod {
 
 		}
 	}
+	*/
 }

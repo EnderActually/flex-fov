@@ -3,8 +3,8 @@ package mod.render360.coretransform.render;
 import java.util.List;
 
 import mod.render360.coretransform.gui.Slider;
-import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiPageButtonList.GuiResponder;
+// import net.minecraft.client.gui.GuiButton;
+// import net.minecraft.client.gui.GuiPageButtonList.GuiResponder;
 
 public class Flex extends RenderMethod {
 
@@ -30,8 +30,8 @@ public class Flex extends RenderMethod {
 
 	@Override
 	public void addButtonsToGui(List<GuiButton> buttonList, int width, int height) {
-		super.addButtonsToGui(buttonList, width, height);
-		buttonList.add(new Slider(new Responder(), 18104, width / 2 - 180, height / 6 + 24, 360, 20, "FOV", 0f, 360f, fov, 1f, null));
+		// super.addButtonsToGui(buttonList, width, height);
+		// buttonList.add(new Slider(new Responder(), 18104, width / 2 - 180, height / 6 + 24, 360, 20, "FOV", 0f, 360f, fov, 1f, null));
 	}
 
 	@Override
@@ -39,7 +39,8 @@ public class Flex extends RenderMethod {
 		return fov;
 	}
 
-	public class Responder implements GuiResponder {
+	// public class Responder implements GuiResponder {
+	/*
 		@Override
 		public void setEntryValue(int id, boolean value) {
 
@@ -58,4 +59,5 @@ public class Flex extends RenderMethod {
 
 		}
 	}
+	*/
 }
