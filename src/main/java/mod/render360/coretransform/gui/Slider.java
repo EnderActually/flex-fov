@@ -7,11 +7,12 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiPageButtonList;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.I18n;
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
+// import net.minecraftforge.fml.relauncher.Side;
+// import net.minecraftforge.fml.relauncher.SideOnly;
 
-@SideOnly(Side.CLIENT)
-public class Slider extends GuiButton
+// @SideOnly(Side.CLIENT)
+// public class Slider extends GuiButton
+/*
 {
     private float sliderPosition = 1.0F;
     private float stepSize;
@@ -159,3 +160,4 @@ public class Slider extends GuiButton
         String getText(int id, String name, float value);
     }
 }
+*/

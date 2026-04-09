@@ -12,8 +12,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.resources.I18n;
 
-// public class Render360Settings extends GuiScreen
-/*
+/* public class Render360Settings extends GuiScreen
 {
 	private final GuiScreen parentGuiScreen;
 	public static final String screenTitle = "Render 360 Settings";
